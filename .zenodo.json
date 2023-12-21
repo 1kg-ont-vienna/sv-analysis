@@ -7,7 +7,7 @@
     {
       "orcid": "0000-0002-0382-3702",
       "affiliation": "Heinrich Heine University",
-      "name": "Ebler,Jana"
+      "name": "Ebler, Jana"
     },
     {
       "affiliation": "Research Institute of Molecular Pathology, Vienna BioCenter, Vienna, Austria",
@@ -16,27 +16,27 @@
     {
       "orcid": "0000-0002-2798-3794",
       "affiliation": "European Molecular Biology Laboratory (EMBL)",
-      "name": "Korbel,Jan"
+      "name": "Korbel, Jan"
     },
     {
       "orcid": "0000-0002-9376-1030",
       "affiliation": "Heinrich Heine University",
-      "name": "Marschall,Tobias"
+      "name": "Marschall, Tobias"
     },
     {
       "orcid": "0009-0002-2037-2533",
       "affiliation": "Heinrich Heine University",
-      "name": "Pani,Samarendra"
+      "name": "Pani, Samarendra"
     },
     {
       "orcid": "0000-0001-5773-5620",
       "affiliation": "European Molecular Biology Laboratory (EMBL)",
-      "name": "Rausch,Tobias"
+      "name": "Rausch, Tobias"
     },
     {
       "orcid": "0000-0003-4693-3140",
       "affiliation": "European Molecular Biology Laboratory (EMBL)",
-      "name": "Rodríguez-Martín,Bernardo"
+      "name": "Rodríguez-Martín, Bernardo"
     },
     {
       "affiliation": "Research Institute of Molecular Pathology, Vienna BioCenter, Vienna, Austria",
@@ -45,14 +45,16 @@
     {
       "orcid": "0000-0003-2198-1920",
       "affiliation": "Heinrich Heine University",
-      "name": "Söylev,Arda"
+      "name": "Söylev, Arda"
     },
     {
       "affiliation": "European Molecular Biology Laboratory (EMBL)",
-      "name": "Tsapalou,Vasiliki"
+      "name": "Tsapalou, Vasiliki"
     }
   ],
   "title": "SV analysis of the 1019 samples of the 1KG-ONT panel.",
+  "upload_type": "dataset",
+  "description": "SV analysis of the long-read sequencing data of the 1019 samples of the 1KG-ONT panel. The data is hosted at the International Genome Sample Resource (IGSR) in the <a href=\"https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/\">1KG_ONT_VIENNA directory</a>. Please see the <a href=\"https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/README_1KG_ONT_VIENNA.md\">README</a> and <a href=\"https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/README_1KG_ONT_VIENNA_datareuse_statement.md\">data reuse statement</a> for further information about this dataset.",
   "keywords": [
     "structural-variation",
     "genomics"
