@@ -8,7 +8,7 @@ The data is hosted at the International Genome Sample Resource (IGSR) in the dir
 
 ## Genome alignments
 
-The alignment pipeline used to align to GRCh38, CHM13 and a prebuilt human genome graph is detailed below. The [reference subdirectory](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/reference/) at IGSR contains the used linear and graph-based reference genomes.
+The alignment pipeline used to align to GRCh38, CHM13 and a prebuilt human genome graph is detailed below. The [reference subdirectory](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/reference/) at IGSR contains the used linear and graph-based reference genomes. There are distinct subdirectories for the linear reference genome alignments in CRAM format for [GRCh38](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38) and [CHM13](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/t2t/) as well as (graph genome alignments in GAF format)[(https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/gaf/).
 
 ### Base-calling
 
