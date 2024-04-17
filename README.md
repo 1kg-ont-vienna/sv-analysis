@@ -38,13 +38,13 @@ Multiple ONT runs for the same sample were tagged using different read-groups an
 
 ### Graph genome alignments
 
-The pangenome graph built with minigraph for HPRC year-1 samples (https://doi.org/10.5281/zenodo.6983934) was used to map the ONT reads with minigraph.
+The pangenome graph built with minigraph for HPRC year-1 samples [https://doi.org/10.5281/zenodo.6983934](https://doi.org/10.5281/zenodo.6983934) was used to map the ONT reads with minigraph.
 
 `minigraph --vc -cx lr chm13-90c.r518.gfa.gz ${ID}.fasta | bgzip > ${ID}.gaf.gz`
 
 ## Data Reuse policy
 
-This README relates to all data associated with the collaborative effort analyzing the long-read sequencing data of the 1019 members of the 1KG-ONT panel. These data were generated at the Institute of Molecular Pathology (Vienna, Austria) with funds provided by Boehringer-Ingelheim. Extracted DNA was obtained from the Coriell Institute for Medical Research and was consented for full public release of genomic data. Please see Coriell (https://www.coriell.org) for more information on specific cell lines.
+This README relates to all data associated with the collaborative effort analyzing the long-read sequencing data of the 1019 members of the 1KG-ONT panel. These data were generated at the Institute of Molecular Pathology (Vienna, Austria) with funds provided by Boehringer-Ingelheim. Extracted DNA was obtained from the Coriell Institute for Medical Research and was consented for full public release of genomic data. Please see [Coriell](https://www.coriell.org) for more information on specific cell lines.
 
 All data in or under the directory at [https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/) is part of this Project.
 
