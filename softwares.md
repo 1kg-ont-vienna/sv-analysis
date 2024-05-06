@@ -24,26 +24,26 @@ The URL of the README: https://github.com/eblerjana/long-read-1kg/blob/main/grap
 
 The genotyping pipeline using Giggles (Methods, Section “Graph-aware genotyping with Giggles”), the associated preprocessing pipelines (Methods, Section “Preparing phased VCF panel”), SV calling with SVarp (Methods, Section “Variant calling using pangenome graph”), phasing pipeline (Methods, Section “Phasing with the ONT reads” and “Comparison of the WhatsHap phased VCFs against NYGC statistical phasing”), and the haplotype-tagging pipeline (Methods, Section “Haplotype-tagging of ONT reads”).
 
-URL of the Repository: https://github.com/marschall-lab/project-ont-1kg/tree/main/snakemake_pipelines
+URL of the Pipeline: https://github.com/1kg-ont-vienna/sv-analysis/tree/main/hhu-snakemake-pipelines
 
 The URL of the README:
 
- - Haplotype-tagging of ONT reads using WhatsHap for downstream tools: https://github.com/marschall-lab/project-ont-1kg/blob/main/snakemake_pipelines/haplotagging/README.md
+ - Haplotype-tagging of ONT reads using WhatsHap for downstream tools: https://github.com/1kg-ont-vienna/sv-analysis/tree/main/hhu-snakemake-pipelines/haplotagging/README.md
 
- - Phasing experiments with WhatsHap for checking quality of reads: https://github.com/marschall-lab/project-ont-1kg/blob/main/snakemake_pipelines/phasing/README.md
+ - Phasing experiments with WhatsHap for checking quality of reads: https://github.com/1kg-ont-vienna/sv-analysis/tree/main/hhu-snakemake-pipelines/phasing/README.md
 
- - Genotyping on the HPRC_mg_44+966 using Giggles along with preprocessing: https://github.com/marschall-lab/project-ont-1kg/blob/main/snakemake_pipelines/augmented_graph/README.md
+ - Genotyping on the HPRC_mg_44+966 using Giggles along with preprocessing: https://github.com/1kg-ont-vienna/sv-analysis/tree/main/hhu-snakemake-pipelines/post-augmentation-genotyping/README.md
  
- - Genotyping on the HPRC_mg using Giggles and calling variants with SVarp: https://github.com/marschall-lab/project-ont-1kg/blob/main/snakemake_pipelines/svarp-giggles_combined_pipeline/README.md
+ - Genotyping on the HPRC_mg using Giggles and calling variants with SVarp: https://github.com/1kg-ont-vienna/sv-analysis/tree/main/hhu-snakemake-pipelines/pre-augmentation-giggles-svarp/README.md
 
 
 ## Repository 4
 
 Analysis script for genotyping.
 
-URL of the Repository: https://github.com/marschall-lab/project-ont-1kg/tree/main/analysis_scripts/genotyping
+URL of the Repository: https://github.com/1kg-ont-vienna/sv-analysis/tree/main/hhu-analysis-scripts
 
-The URL of the README: https://github.com/marschall-lab/project-ont-1kg/blob/main/analysis_scripts/README.md
+The URL of the README: https://github.com/1kg-ont-vienna/sv-analysis/tree/main/hhu-analysis-scripts/README.md
 
 ## Repository 5
 
