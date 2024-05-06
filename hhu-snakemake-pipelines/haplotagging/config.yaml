@@ -1,0 +1,13 @@
+# path of the GRCh38 CRAMs
+# Files are available here https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38/
+path_to_cram: "/gpfs/project/projects/medbioinf/data/share/globus/hhu-1000g-ont/hg38/"
+
+# path to the reference fasta used to create the CRAMS
+# GRCh38 reference is available here https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/reference/
+# this directory should contain the files 1KG_ONT_VIENNA_t2t.fa and 1KG_ONT_VIENNA_hg38.fa along with their .fai index
+# the directory of the reference
+reference_directory: "/gpfs/project/projects/medbioinf/users/spani/files/ref/"
+
+# path of the NYGC phased VCFs directory
+# files are available for download at http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/
+path_to_nygc: "/gpfs/project/projects/medbioinf/users/spani/files/vcf/1000GP/NYGC/phased/"

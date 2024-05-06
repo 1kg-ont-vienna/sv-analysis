@@ -1,0 +1,117 @@
+# Specific information about different augmented graphs
+# Note: No '.' (dots) in the gfa name.
+# {callset name which should match the gfa name}:
+#   gfa: {path to the GFA augmented using the graph augmentation pipeline}
+#   pseudohaplotypes: {path to FOFN (file of file names) having list of pseudohaplotype FASTAs coming from the graph augmentation pipeline}
+callsets:
+  minigraph-extended_all:
+    gfa: '/gpfs/project/projects/medbioinf/users/ebler/long-read-1kg/graph-augmentation/results/minigraph/minigraph-extended_all.gfa'
+    pseudohaplotypes: 'resources/pseudohaplotypes/minigraph-extended_all.txt'
+
+# path of the GRCh38 CRAMs
+# Files are available here https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38/
+path_to_cram: "/gpfs/project/projects/medbioinf/data/share/globus/hhu-1000g-ont/hg38/"
+
+# path to the reference fasta used to create the CRAMS
+# GRCh38 reference is available here https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/reference/
+# the directory of the reference
+# this directory should contain the files 1KG_ONT_VIENNA_t2t.fa and 1KG_ONT_VIENNA_hg38.fa along with their .fai index
+reference_directory: "/gpfs/project/projects/medbioinf/users/spani/files/ref/"
+
+# path to the haplotags. The haplotags should be present in the following format: <path to haplotags>/<sample name>/<sample name>.tsv
+# these files are produced by the haplotagging pipeline
+path_to_haplotags: ''
+
+# path to the directory containing HPRC Year 1 assemblies.
+# they can be downloaded from
+# the files inside the folder have to be of the format <sample name>.<haplotype number>.fa where haplotype number is 1 or 2.
+path_to_hprc_assemblies: '/gpfs/project/projects/medbioinf/users/spani/files/fasta/HPRC/Assemblies_Yr1/'
+
+# path to the reference of the gfa
+# download chm13v2.0_maskedY_rCRS.fa.gz from https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/CHM13/assemblies/analysis_set/
+# the .fai index should also be available
+path_to_hprc_mg_ref: '/gpfs/project/projects/medbioinf/users/spani/files/fasta/HPRC/reference/chm13v2.0_maskedY_rCRS.fa.gz'
+
+# path to minigraph
+# link to github: https://github.com/lh3/minigraph
+path_to_minigraph: '/gpfs/project/projects/medbioinf/users/spani/packages/minigraph/minigraph'
+
+
+### These arguments are not required right now for the pipeline. These results are not used for post-genotyping analysis
+
+# path of the NYGC phased VCFs directory
+# files are available for download at http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/
+path_to_nygc: "/gpfs/project/projects/medbioinf/users/spani/files/vcf/1000GP/NYGC/phased/"
+
+# path of the pangenie genotypes.
+# files should be of the format `pangenie-{sample}_genotyping_biallelic.vcf.gz`
+path_to_pangenie_gts: "/gpfs/project/projects/medbioinf/users/ebler/long-read-1kg/pangenie-genotypes/results/"
+
+# path of the pangenie reference panel.
+path_to_pangenie_panel_vcf: '/gpfs/project/projects/medbioinf/users/ebler/long-read-1kg/pangenie-genotypes/input/chm13_cactus_filtered_ids_biallelic.vcf'
+
+
+hprc_samples:
+  - HG00438
+  - HG00621
+  - HG00673
+  - HG00735
+  - HG00741
+  - HG01071
+  - HG01106
+  - HG01123
+  - HG01175
+  - HG01258
+  - HG01358
+  - HG01361
+  - HG01891
+  - HG01928
+  - HG01952
+  - HG01978
+  - HG02148
+  - HG02257
+  - HG02486
+  - HG02559
+  - HG02572
+  - HG02622
+  - HG02630
+  - HG02717
+  - HG02886
+  - HG03453
+  - HG03516
+  - HG03540
+  - HG03579
+  - HG00733
+  - HG01109
+  - HG01243
+  - HG02055
+  - HG02080
+  - HG02109
+  - HG02145
+  - HG02723
+  - HG02818
+  - HG03098
+  - HG03486
+  - HG03492
+  - NA18906
+  - NA20129
+  - NA21309
+
+hgsvc_samples:
+  - NA12878
+  - NA18989
+  - NA19129
+  - NA19238
+  - NA19331
+  - NA19347
+  - NA20847
+  - HG00731
+  - HG00513
+  - HG00171
+  - HG03009
+  - HG00096
+  - HG01596
+  - HG00268
+  - HG02554
+  - HG02953
+  - HG01890

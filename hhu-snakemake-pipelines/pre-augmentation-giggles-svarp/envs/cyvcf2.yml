@@ -1,0 +1,14 @@
+dependencies:
+  - bcftools
+  - bedtools
+  - matplotlib
+  - pyvcf
+  - samtools
+  - pyfaidx
+  - seaborn
+  - rtg-tools
+  - cyvcf2
+  - pandas
+  - upsetplot
+  - scipy
+  - scikit-learn

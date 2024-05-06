@@ -1,0 +1,15 @@
+dependencies:
+  - samtools
+  - bcftools
+  - biopython
+  - pysam
+  - pyvcf
+  - pandas
+  - matplotlib
+  - whatshap
+  - bedtools
+  - pyfaidx
+  - seaborn
+  - upsetplot
+  - scipy
+  - scikit-learn

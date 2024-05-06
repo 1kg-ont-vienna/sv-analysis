@@ -1,0 +1,98 @@
+# path of the GRCh38 CRAMs
+# Files are available here https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38/
+path_to_cram: "/gpfs/project/projects/medbioinf/data/share/globus/hhu-1000g-ont/hg38/"
+
+# path to the reference fasta used to create the CRAMS
+# GRCh38 reference is available here https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/reference/
+# the directory of the reference
+# this directory should contain the files 1KG_ONT_VIENNA_t2t.fa and 1KG_ONT_VIENNA_hg38.fa along with their .fai index
+reference_directory: "/gpfs/project/projects/medbioinf/users/spani/files/ref/"
+
+# path to the haplotags. The haplotags should be present in the following format: <path to haplotags>/<sample name>/<sample name>.tsv
+# these files are produced by the haplotagging pipeline
+path_to_haplotags: ''
+
+# path to the directory containing HPRC Year 1 assemblies.
+# they can be downloaded from
+# the files inside the folder have to be of the format <sample name>.<haplotype number>.fa where haplotype number is 1 or 2.
+path_to_hprc_assemblies: '/gpfs/project/projects/medbioinf/users/spani/files/fasta/HPRC/Assemblies_Yr1/'
+
+# path to HPRC_mg graph
+# download chm13-90c.r518.gfa from https://zenodo.org/records/6499594 (file has been provided as a gzip. Unzip it for using)
+path_to_hprc_mg: '/gpfs/project/projects/medbioinf/users/spani/files/gfa/1000GP/chm13-90c.r518.gfa'
+
+# path to the reference of the gfa
+# download chm13v2.0_maskedY_rCRS.fa.gz from https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/CHM13/assemblies/analysis_set/
+path_to_hprc_mg_ref: '/gpfs/project/projects/medbioinf/users/spani/files/fasta/HPRC/reference/chm13v2.0_maskedY_rCRS.fa.gz'
+
+# path to minigraph
+# link to github: https://github.com/lh3/minigraph
+path_to_minigraph: '/gpfs/project/projects/medbioinf/users/spani/packages/minigraph/minigraph'
+
+# path to the pav container
+# this might not be available online. For the container contact Samarendra Pani at samarendra.pani@hhu.de
+path_to_pav: '/gpfs/project/projects/medbioinf/container/pav_v2.2.4.1.sif'
+
+# path to svarp
+# link to github: https://github.com/asylvz/SVarp
+path_to_svarp: '/gpfs/project/projects/medbioinf/projects/1000g-ont/svarp/build/svarp'
+
+# path to wtdbg2
+# link to github: https://github.com/ruanjue/wtdbg2
+path_to_wtdbg2: '/gpfs/project/projects/medbioinf/users/spani/packages/wtdbg2/'
+
+# OTHER REQUIREMENTS (refer to README)
+# conda environment for gaftools called gaftools-env
+# conda environment for giggles called giggles-env
+
+
+samples:
+  - HG00438
+  - HG00621
+  - HG00673
+  - HG00735
+  - HG00741
+  - HG01071
+  - HG01106
+  - HG01123
+  - HG01175
+  - HG01258
+  - HG01358
+  - HG01361
+  - HG01891
+  - HG01928
+  - HG01952
+  - HG01978
+  - HG02148
+  - HG02257
+  - HG02486
+  - HG02559
+  - HG02572
+  - HG02622
+  - HG02630
+  - HG02717
+  - HG02886
+  - HG03453
+  - HG03516
+  - HG03540
+  - HG03579
+  - HG00733
+  - HG01109
+  - HG01243
+  - HG02055
+  - HG02080
+  - HG02109
+  - HG02145
+  - HG02723
+  - HG02818
+  - HG03098
+  - HG03486
+  - HG03492
+  - NA18906
+  - NA20129
+  - NA21309
+
+
+haplotypes:
+  - 1
+  - 2

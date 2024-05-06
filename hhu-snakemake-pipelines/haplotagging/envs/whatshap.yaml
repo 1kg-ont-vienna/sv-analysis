@@ -1,0 +1,3 @@
+dependencies:
+  - whatshap=2.0
+  - samtools

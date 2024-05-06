@@ -1,0 +1,16 @@
+dependencies:
+  - minimap2
+  - svim-asm
+  - samtools
+  - bcftools
+  - whatshap
+  - pandas
+  - scipy
+  - seaborn
+  - matplotlib
+  - bedtools
+  - upsetplot
+  - pyfaidx
+  - cyvcf2
+  - pysam
+  - pyvcf

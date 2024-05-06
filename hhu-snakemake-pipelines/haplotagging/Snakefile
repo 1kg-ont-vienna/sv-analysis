@@ -1,0 +1,401 @@
+"""
+Haplotagging all the reads in the CRAM files against the Phased NYGC VCFs.
+"""
+configfile: './config.yaml'
+
+import subprocess
+import re
+import gzip
+import pandas as pd
+
+chromosomes = ['chr%d'%(x+1) for x in range(22)] + ['chrX']
+
+#Finding sample list used for 1000GP project by us
+path=config['path_to_cram']
+ls_command = 'ls '+path
+process = subprocess.Popen(ls_command.split(), stdout=subprocess.PIPE)
+ls_out, ls_err = process.communicate()
+sample_re = re.compile('(?:NA|HG)\d{5}')
+
+# 1000GP ONT Vienna list
+cram_sample_list = []
+for s in ls_out.decode('utf-8').split('\n'):
+    if not s.endswith('cram'):
+        continue
+    cram_sample_list.append(s.split('.')[0])
+
+# NYGC list
+nygc_sample_list = []
+df = pd.read_csv('resources/igsr_sample_data.tsv', sep="\t")
+nygc_sample_list = df["Sample name"].to_list()
+
+# finding common samples
+common_samples = list(set(cram_sample_list).intersection(nygc_sample_list))
+
+# separating list based on sex
+df = pd.read_csv('resources/1k_ont_data_overview-samples_and_sequencing.tsv', sep="\t")
+df = df[["SAMPLE","SEX"]].to_numpy()
+female_samples = []
+male_samples = []
+unspecified_samples = []
+for sample,sex in df:
+    if sex == "Female":
+        female_samples.append(sample)
+    elif sex == "Male":
+        male_samples.append(sample)
+    else:
+        unspecified_samples.append(sample) #HG03895 sex is not known. Considering it as male.
+
+female_samples = list(set(all_samples).intersection(female_samples))
+male_samples = list(set(all_samples).intersection(male_samples))
+unspecified_samples = list(set(all_samples).intersection(unspecified_samples))
+male_samples = male_samples+unspecified_samples
+
+
+wildcard_constraints:
+    chr="chr[0-9A-Z]"
+
+#############################
+##### Rule Definitions: #####
+#############################
+
+rule all:
+    input:
+        expand('results/GRCh38/{sample}/{sample}.tsv', sample=female_samples),
+        expand('results/GRCh38/{sample}/{sample}.tsv', sample=male_samples),
+        'results/GRCh38/sample_sex.tsv',
+        #'results/GRCh38/qc/summary.tsv',
+        #expand('results/GRCh38/qc/{sample}_absent-read-stats.tsv', sample=all_samples)
+        
+
+############################
+##### Merge NYGC VCFs ######
+############################
+
+rule create_region_vcf_file_list:
+    input:
+        vcfs=expand(config['path_to_nygc']+"/1kGP_high_coverage_Illumina.{chr}.filtered.SNV_INDEL_SV_phased_panel.vcf.gz", chr=chromosomes)
+    output:
+        temp('results/nygc-vcf-list.txt')
+    run:
+        f = open(output[0], 'w')
+        for name in input.vcfs:
+            print(name, file=f)
+        f.close()
+
+rule concat_nygc_vcf:
+    input:
+        file_list='results/nygc-vcf-list.txt'
+    output:
+        vcf='results/nygc-merged.vcf.gz',
+        ind='results/nygc-merged.vcf.gz.csi'
+    log:
+        'results/nygc-merged.log'
+    conda:
+        'envs/preprocessing.yaml'
+    resources:
+        runtime_hrs=5,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 2000 * attempt
+    shell:
+        '''
+        bcftools concat -o {output.vcf} -Oz -f {input.file_list} &> {log}
+        bcftools index {output.vcf}
+        '''
+
+########################################
+##### Split Phased VCF Sample-wise #####
+########################################
+
+rule split_phased_vcf:
+    input:
+        'results/nygc-merged.vcf.gz'
+    output:
+        'results/temp/{sample}.vcf.gz'
+    wildcard_constraints:
+        sample = "|".join(all_samples)
+    conda:
+        'envs/preprocessing.yaml'
+    resources:
+        runtime_hrs=8,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 2000 * attempt
+    shell:
+        '''
+        bcftools view -Oz -s {wildcards.sample} -o {output} {input}
+        '''
+
+rule index_phased_vcf:
+    input:
+        'results/temp/{sample}.vcf.gz'
+    output:
+        'results/temp/{sample}.vcf.gz.csi'
+    wildcard_constraints:
+        sample = "|".join(all_samples)
+    conda:
+        'envs/preprocessing.yaml'
+    resources:
+        runtime_hrs=0,
+        runtime_min=20,
+        mem_total_mb=lambda wildcards, attempt: 2000 * attempt
+    shell:
+        '''
+        bcftools index {input}
+        '''
+
+rule extract_PAR:
+    input:
+        vcf='results/temp/{sample}.vcf.gz',
+        script='scripts/extract_PAR.py'
+    output:
+        'results/temp/{sample}_PAR_only.vcf.gz'
+    wildcard_constraints:
+        sample = "|".join(all_samples)
+    conda:
+        'envs/basic.yaml'
+    resources:
+        runtime_hrs=1,
+        runtime_min=20,
+        mem_total_mb=lambda wildcards, attempt: 2000 * attempt
+    shell:
+        '''
+        python {input.script} --bgzip --vcf {input.vcf} --output {output}
+        '''
+
+rule index_PARonly_vcf:
+    input:
+        'results/temp/{sample}_PAR_only.vcf.gz'
+    output:
+        'results/temp/{sample}_PAR_only.vcf.gz.csi'
+    wildcard_constraints:
+        sample = "|".join(all_samples)
+    conda:
+        'envs/basic.yaml'
+    resources:
+        runtime_hrs=0,
+        runtime_min=20,
+        mem_total_mb=lambda wildcards, attempt: 2000 * attempt
+    shell:
+        '''
+        bcftools index {input}
+        '''
+
+
+##############################
+##### Haplotagging Reads #####
+##############################
+
+# converting CRAMs to BAMs (since the CRAMs were creating some issues)
+rule convert_cram_to_bam:
+    input:
+        reads=config['path_to_cram']+'/{sample}.hg38.cram',
+        ref=config['reference_directory']+'/1KG_ONT_VIENNA_hg38.fa'
+    output:
+        bam=temp('results/temp/GRCh38_BAM/{sample}.bam'),
+        ind=temp('results/temp/GRCh38_BAM/{sample}.bam.bai')
+    params:
+        ref_dir=config['reference_directory']
+    wildcard_constraints:
+        sample = "|".join(all_samples)
+    conda:
+        'envs/preprocessing.yaml'
+    resources:
+        runtime_hrs=lambda wildcards, attempt: 10 * attempt,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 5000 * attempt
+    shell:
+        '''
+        seq_cache_populate.pl -root {params.ref_dir} {input.ref}
+        export REF_PATH={params.ref_dir}/%2s/%2s/%s:http://www.ebi.ac.uk/ena/cram/md5/%s
+        export REF_CACHE={params.ref_dir}/%2s/%2s/%s
+        samtools view -b -T {input.ref} -o {output.bam} {input.reads}
+        samtools index -b {output.bam}
+        '''
+
+# haplotagging females separately (since they dont have PAR regions)
+rule haplotag_females:
+    input:
+        reads='results/temp/GRCh38_BAM/{sample}.bam',
+        read_ind='results/temp/GRCh38_BAM/{sample}.bam.bai',
+        vcf='results/temp/{sample}.vcf.gz',
+        vcf_ind='results/temp/{sample}.vcf.gz.csi',
+        ref=config['reference_directory']+'/1KG_ONT_VIENNA_hg38.fa'
+    output:
+        haplotag_list='results/GRCh38/{sample}/{sample}.tsv'
+    params:
+        ref_dir=config['reference_directory']
+    log:
+        'results/GRCh38/{sample}/output.log'
+    wildcard_constraints:
+        sample = "|".join(female_samples)
+    conda:
+        'envs/whatshap.yaml'
+    resources:
+        runtime_hrs=lambda wildcards, attempt: 24 * attempt,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 80000 * attempt
+    shell:
+        '''
+        seq_cache_populate.pl -root {params.ref_dir} {input.ref}
+        export REF_PATH={params.ref_dir}/%2s/%2s/%s:http://www.ebi.ac.uk/ena/cram/md5/%s
+        export REF_CACHE={params.ref_dir}/%2s/%2s/%s
+        whatshap haplotag --skip-missing-contigs --reference {input.ref} --sample {wildcards.sample}  --output-haplotag-list {output.haplotag_list} --output /dev/null {input.vcf} {input.reads}
+        '''
+
+# Initial haplotagging of male samples (excluding the non-PAR regions)
+rule haplotag_males:
+    input:
+        reads='results/temp/GRCh38_BAM/{sample}.bam',
+        read_ind='results/temp/GRCh38_BAM/{sample}.bam.bai',
+        vcf='results/temp/{sample}_PAR_only.vcf.gz',
+        vcf_ind='results/temp/{sample}_PAR_only.vcf.gz.csi',
+        ref=config['reference_directory']+'/1KG_ONT_VIENNA_hg38.fa'
+    output:
+        haplotag_list='results/temp/GRCh38/males/{sample}_read_tags.tsv'
+    params:
+        ref_dir=config['reference_directory']
+    log:
+        'results/GRCh38/{sample}/output.log'
+    wildcard_constraints:
+        sample = "|".join(male_samples)
+    conda:
+        'envs/whatshap.yaml'
+    resources:
+        runtime_hrs=lambda wildcards, attempt: 24 * attempt,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 80000 * attempt
+    shell:
+        '''
+        seq_cache_populate.pl -root {params.ref_dir} {input.ref}
+        export REF_PATH={params.ref_dir}/%2s/%2s/%s:http://www.ebi.ac.uk/ena/cram/md5/%s
+        export REF_CACHE={params.ref_dir}/%2s/%2s/%s
+        whatshap haplotag --skip-missing-contigs --reference {input.ref} --sample {wildcards.sample} --output-haplotag-list {output.haplotag_list} --output /dev/null {input.vcf} {input.reads}
+        '''
+
+# adding the reads mapping to nonPAR regions of the X.
+rule add_nonPAR_haplotag_males:
+    input:
+        haplotag_list='results/temp/GRCh38/males/{sample}_read_tags.tsv',
+        reads=config['path_to_cram']+'/{sample}.hg38.cram',
+        script='scripts/add_nonPAR_haplotag.py',
+        ref=config['reference_directory']+'/1KG_ONT_VIENNA_hg38.fa'
+    output:
+        'results/GRCh38/{sample}/{sample}.tsv'
+    params:
+        ref_dir=config['reference_directory']
+    wildcard_constraints:
+        sample = "|".join(male_samples+unspecified_samples)
+    conda:
+        'envs/basic.yaml'        
+    resources:
+        runtime_hrs=2,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 40000 * attempt
+    shell:
+        '''
+        seq_cache_populate.pl -root {params.ref_dir} {input.ref}
+        export REF_PATH={params.ref_dir}/%2s/%2s/%s:http://www.ebi.ac.uk/ena/cram/md5/%s
+        export REF_CACHE={params.ref_dir}/%2s/%2s/%s
+        python {input.script} --bam {input.reads} --tag-list {input.haplotag_list} --output {output}
+        '''
+
+# creating YAML file which contains the list of male and female samples.
+rule haplotag_sex_yaml_file:
+    params:
+        male = expand(male_samples),
+        female = expand(female_samples),
+        unspecified = expand(unspecified_samples)
+    output:
+        'results/GRCh38/sample_sex.tsv'
+    run:
+        f = open(output[0], 'w')
+        print('male:', file=f)
+        for name in params.male:
+            print("\t- ", name, file=f)
+        print('female:', file=f)
+        for name in params.female:
+            print("\t- ", name, file=f)
+        print('unspecified:', file=f)
+        for name in params.unspecified:
+            print("\t- ", name, file=f)
+        f.close()
+
+
+#######################################
+########### QC on Haplotags ###########
+#######################################
+
+# Need to get the fasta to count the total reads.
+rule cram_to_fasta:
+    input:
+        reads=config['path_to_cram']+'/{sample}.hg38.cram',
+        ref=config['reference_directory']+'/1KG_ONT_VIENNA_hg38.fa'
+    output:
+        temp('results/temp/fasta/{sample}.fasta')
+    params:
+        ref_dir=config['reference_directory']
+    wildcard_constraints:
+        sample = "|".join(all_samples)
+    conda:
+        'envs/preprocessing.yaml'
+    resources:
+        runtime_hrs=lambda wildcards, attempt: 10 * attempt,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 20000 * attempt
+    shell:
+        '''
+        seq_cache_populate.pl -root {params.ref_dir} {input.ref}
+        export REF_PATH={params.ref_dir}/%2s/%2s/%s:http://www.ebi.ac.uk/ena/cram/md5/%s
+        export REF_CACHE={params.ref_dir}/%2s/%2s/%s
+        samtools fasta {input.reads} > {output}
+        '''
+
+# count the absent reads and report summary and list of reads
+rule count_haplotags:
+    input:
+        fasta=expand('results/temp/fasta/{sample}.fasta', sample=all_samples),
+        tags=expand('results/GRCh38/{sample}/{sample}.tsv', sample=all_samples),
+        script='scripts/count_haplotags.py'
+    output:
+        summary='results/GRCh38/qc/summary.tsv',
+        ind=expand('results/GRCh38/qc/{sample}.txt', sample=all_samples)
+    params:
+        samples=','.join(all_samples),
+        fasta='results/temp/fasta/',
+        tsv='results/GRCh38/',
+        output='results/GRCh38/qc/'
+    wildcard_constraints:
+        sample='|'.join(all_samples)
+    conda:
+        'envs/preprocessing.yaml'
+    resources:
+        runtime_hrs=lambda wildcards, attempt: 10 * attempt,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 20000 * attempt
+    shell:
+        'python {input.script} --samples {params.samples} --tsv {params.tsv} --fasta {params.fasta} --output {params.output} > {output.summary}'
+
+
+rule absent_reads_stats:
+    input:
+        read_list='results/GRCh38/qc/{sample}.txt',
+        bam='results/temp/GRCh38_BAM/{sample}.bam',
+        ind='results/temp/GRCh38_BAM/{sample}.bam.bai',
+        script='scripts/absent_read_stats.py'
+    output:
+        'results/GRCh38/qc/{sample}_absent-read-stats.tsv',
+        'results/GRCh38/qc/{sample}_absent-read-unmapped.txt',
+        'results/GRCh38/qc/{sample}_absent-read-chromosomal.txt',
+        'results/GRCh38/qc/{sample}_absent-read-extra-chromosomal.txt'
+    params:
+        out='results/GRCh38/qc/'
+    wildcard_constraints:
+        sample='|'.join(all_samples)
+    conda:
+        'envs/basic.yaml'
+    resources:
+        runtime_hrs=lambda wildcards, attempt: 10 * attempt,
+        runtime_min=0,
+        mem_total_mb=lambda wildcards, attempt: 20000 * attempt
+    shell:
+        'python {input.script} --absent-reads {input.read_list} --bam {input.bam} --output {params.out} --sample {wildcards.sample}'

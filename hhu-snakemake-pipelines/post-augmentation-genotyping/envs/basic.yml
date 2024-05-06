@@ -1,0 +1,23 @@
+channels:
+  - http://conda.repo.test.hhu.de/conda-forge
+  - http://conda.repo.test.hhu.de/bioconda
+  - http://conda.repo.test.hhu.de/main
+
+dependencies:
+  - bcftools
+  - bedtools
+  - matplotlib
+  - pyvcf
+  - samtools
+  - pyfaidx
+  - seaborn
+  - rtg-tools
+  - cyvcf2
+  - pandas
+  - upsetplot
+  - scipy
+  - scikit-learn
+  - biopython
+  - pysam
+  - whatshap
+  - biopython

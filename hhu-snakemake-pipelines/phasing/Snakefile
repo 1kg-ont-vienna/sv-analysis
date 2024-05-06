@@ -1,0 +1,24 @@
+configfile: 'config.yaml'
+include: 'rules/get-sample-list.smk'
+include: 'rules/no-trio-based-comparison.smk'
+include: 'rules/trio-based-comparison.smk'
+include: 'rules/no-trio-based-phasing.smk'
+include: 'rules/trio-based-phasing.smk'
+include: 'rules/prepare-nygc-genotypes.smk'
+
+family_sample_list = list(sample2family.keys())
+
+include: 'rules/plotting.smk'
+
+wildcard_constraints:
+    sample='|'.join(samples)
+
+rule all:
+    input:
+        expand('results/trio-comparison/{sample}/multiway.tsv', sample=family_sample_list),
+        expand('results/no-trio-comparison/{sample}/multiway.tsv', sample=samples),
+        'results/plots/no-trio-ser.pdf',
+        'results/plots/trio-ser.pdf',
+        expand('results/phased-vcf/longread_trio_phase/{family}.stats.tsv', family=config['families']),
+        expand('results/phased-vcf/trio_phase/{family}.stats.tsv', family=config['families']),
+        expand('results/phased-vcf/longread/{sample}.stats.tsv', sample=samples)

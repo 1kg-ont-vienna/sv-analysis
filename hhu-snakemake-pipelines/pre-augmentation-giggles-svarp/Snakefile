@@ -1,0 +1,37 @@
+configfile: 'config.yaml'
+
+include: 'rules/prepare-vcf.smk'
+include: 'rules/genotyping.smk'
+include: 'rules/discovery.smk'
+include: 'rules/common-rules.smk'
+include: 'rules/ont-alignment.smk'
+include: 'rules/get-sample-list.smk'
+
+# remove samples not giving any new variants from the svarp pipeline
+no_new_variant_samples = ['HG02661', 'HG01600', 'HG01308', 'NA19676']
+svarp_samples = [s for s in samples if s not in no_new_variant_samples]
+
+wildcard_constraints:
+    sample='|'.join(samples),
+    chr='chr[0-9A-Z]',
+    haplotype='(1)|(2)'
+
+rule genotype_experiment:
+    input:
+        'results/annotating-paths/vcf/chm13-90c.r518.check',
+        expand('results/annotating-paths/assembly_mappings/stats/{sample}_{haplotype}_{graph}.png', sample=config['samples'], haplotype=config['haplotypes'], graph=['dv', 'mapq', 'num_align', 'num_res_match', 'p_align']),
+        'results/annotating-paths/assembly_mappings/stats/text_stats.txt',
+        expand('result/svarp-giggles/genotypes/{sample}-biallelic.vcf.gz', sample=samples),
+        expand('result/svarp-giggles/genotypes/{sample}-multiallelic.vcf.gz', sample=samples),
+        'result/svarp-giggles/genotypes/multisample-multiallelic.vcf.gz',
+        'result/svarp-giggles/genotypes/multisample-biallelic.vcf.gz'
+        
+rule svarp_experiment:
+    input:
+        expand('result/svarp-giggles/svarp/{sample}/pav_{ref}/pav_svtigs_merged.vcf', ref=['hg38','t2t'], sample=svarp_samples),
+        
+
+rule all:
+    input:
+        rules.genotype_experiment.input,
+        rules.svarp_experiment.input
