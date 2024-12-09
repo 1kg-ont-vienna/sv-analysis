@@ -1,3 +1,0 @@
-dependencies:
-  - bcftools=1.9
-  - samtools

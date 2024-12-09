@@ -1,4 +1,0 @@
-dependencies:
-  - python
-  - pandas
-  - cyvcf2

@@ -1,7 +1,0 @@
-channels:
-  - http://conda.repo.test.hhu.de/conda-forge
-  - http://conda.repo.test.hhu.de/bioconda
-  - http://conda.repo.test.hhu.de/main
-
-dependencies:
-  - whatshap =2.0

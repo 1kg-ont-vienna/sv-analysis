@@ -1,5 +1,0 @@
-dependencies:
-  - graphaligner
-  - wtdbg
-  - zlib
-  - libgcc
