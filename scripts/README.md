@@ -38,3 +38,7 @@ To calculate the alignment error rate, genome coverage and other statistics.
 
 `cd qc/ && ./qc.sh`
 
+## Lifting of SVs to GRCh38
+
+This workflow uses the phased SVs to implant SVs into CHM13 haplotypes, which are then aligned to GRCh38 and called via [svim-asm](https://github.com/eldariont/svim-asm).
+

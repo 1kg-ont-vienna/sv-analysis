@@ -5,7 +5,7 @@ BASEDIR=$(dirname "$SCRIPT")
 export PATH=${BASEDIR}/../mamba/bin:${PATH}
 
 HG=${BASEDIR}/../genome/hg38.fa
-export REF_CACHE=${BASEDIR}../genome/cache_hg38/%2s/%2s/%s
+export REF_CACHE=${BASEDIR}/../genome/cache_hg38/%2s/%2s/%s
 
 THREADS=8
 
