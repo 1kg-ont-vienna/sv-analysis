@@ -4,6 +4,10 @@ SCRIPT=$(readlink -f "$0")
 BASEDIR=$(dirname "$SCRIPT")
 export PATH=${BASEDIR}/../mamba/bin:${PATH}
 
+# Window for insertions
+WIN=200
+ONLY_CANONICAL=0
+
 if [ ! -f MEI_Callset_T2T-CHM13.ALL.20240918.csv ]
 then
     wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/HGSVC3/release/Mobile_Elements/1.0/MEI_Callset_T2T-CHM13.ALL.20240918.csv.gz
@@ -18,14 +22,10 @@ then
     rm tmp.bcf tmp.bcf.csi
 fi
 
-# Window for insertions
-WIN=200
-
 ## HGSVC3
 python3 convert.py -c MEI_Callset_T2T-CHM13.ALL.20240918.csv -w ${WIN} > hgsvc3.t2t.bed
 
 ## ONT
-ONLY_CANONICAL=0
 echo -e "mei\tsample\tdataset\tall\tshared\tunique\tfdr\tsensitivity" > stats.tsv
 for SAMPLE in `cat samples.tsv`
 do
