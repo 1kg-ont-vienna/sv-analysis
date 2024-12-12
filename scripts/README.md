@@ -66,6 +66,10 @@ Likewise for deletions:
 
 `cd del_hgsvc3/ && ./bySample.sh`
 
+For transposable element deletions from the CHM13 reference:
+
+`cd del_mei_hgsvc3/ && ./bySample.sh`
+
 ## Lifting of SVs to GRCh38
 
 This workflow uses the phased SVs for each sample to implant SVs into CHM13 haplotypes, which are then aligned to GRCh38 and called via [svim-asm](https://github.com/eldariont/svim-asm).
