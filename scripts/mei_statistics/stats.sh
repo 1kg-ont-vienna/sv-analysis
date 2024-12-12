@@ -18,7 +18,7 @@ echo "Non-reference MEI" ${TOTAL}
 TOTAL=0
 for TE in Alu L1 SVA
 do
-    COUNT=`bcftools query -i 'STRLEN(REF)>STRLEN(ALT)' -f "%ITYPE_N\t%FAM_N\n" ../release/svan-annotation/final-vcf.unphased.SVAN_1.3.vcf.gz | awk '$2=="'${TE}'"' | wc -l`
+    COUNT=`bcftools query -i 'STRLEN(REF)>STRLEN(ALT)' -f "%DTYPE_N\t%FAM_N\n" ../release/svan-annotation/final-vcf.unphased.SVAN_1.3.vcf.gz | awk '$2=="'${TE}'"' | wc -l`
     echo "Deletion" ${TE} ${COUNT}
     TOTAL=`expr ${TOTAL} + ${COUNT}`
 done
