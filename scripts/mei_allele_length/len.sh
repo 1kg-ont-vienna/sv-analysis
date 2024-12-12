@@ -7,6 +7,7 @@ export PATH=${BASEDIR}/../mamba/bin:${PATH}
 if [ ! -f 1KGP_3202.Illumina_ensemble_callset.freeze_V1.vcf.gz ]
 then
     wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20210124.SV_Illumina_Integration/1KGP_3202.Illumina_ensemble_callset.freeze_V1.vcf.gz
+    wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20210124.SV_Illumina_Integration/1KGP_3202.Illumina_ensemble_callset.freeze_V1.vcf.gz.tbi
 fi
 
 if [ ! -f nygc.mei ]
@@ -24,3 +25,5 @@ then
     rm tmp.bcf tmp.bcf.csi
     bcftools query -f "%CHROM\t%POS\t%INS_LEN\t%ITYPE_N\t%FAM_N\n" ont.vcf.gz | egrep "Alu|L1|SVA" | cut -f 1,2,3,5 | grep -v "," | awk '$3!="."'  > ont.mei
 fi
+
+Rscript mei.svlen.R
