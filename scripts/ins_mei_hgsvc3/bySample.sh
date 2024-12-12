@@ -21,6 +21,10 @@ then
     tabix ont.vcf.gz
     rm tmp.bcf tmp.bcf.csi
 fi
+echo "All MEIs"
+bcftools query -i '(STRLEN(ALT)>=(STRLEN(REF)+50))' -f "%INFO/ITYPE_N\t%INFO/FAM_N\t%INFO/NOT_CANONICAL\n" ${BASEDIR}/../release/svan-annotation/final-vcf.unphased.SVAN_1.3.vcf.gz | egrep "partnered|solo" | egrep "Alu|L1|SVA" | cut -f 2 | sort | uniq -c
+echo "Non-canonical MEIs"
+bcftools query -i '(STRLEN(ALT)>=(STRLEN(REF)+50))' -f "%INFO/ITYPE_N\t%INFO/FAM_N\t%INFO/NOT_CANONICAL\n" ${BASEDIR}/../release/svan-annotation/final-vcf.unphased.SVAN_1.3.vcf.gz | egrep "partnered|solo" | egrep "Alu|L1|SVA" | cut -f 2- | sort | uniq -c
 
 ## HGSVC3
 python3 convert.py -c MEI_Callset_T2T-CHM13.ALL.20240918.csv -w ${WIN} > hgsvc3.t2t.bed
