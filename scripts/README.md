@@ -58,6 +58,14 @@ The MEI comparison to HGSVC3 can be recomputed using:
 
 `cd ins_mei_hgsvc3/ && ./bySample.sh`
 
+FDR for all non tandem-repeat associated insertions:
+
+`cd ins_hgsvc3/ && ./bySample.sh`
+
+Likewise for deletions:
+
+`cd del_hgsvc3/ && ./bySample.sh`
+
 ## Lifting of SVs to GRCh38
 
 This workflow uses the phased SVs for each sample to implant SVs into CHM13 haplotypes, which are then aligned to GRCh38 and called via [svim-asm](https://github.com/eldariont/svim-asm).
