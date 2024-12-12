@@ -40,6 +40,12 @@ To calculate the alignment error rate, genome coverage and other statistics.
 
 `cd qc/ && ./qc.sh`
 
+## MEI statistics
+
+The MEI statistics can be computed using
+
+`cd mei_statistics/ && ./stats.sh`
+
 ## Lifting of SVs to GRCh38
 
 This workflow uses the phased SVs for each sample to implant SVs into CHM13 haplotypes, which are then aligned to GRCh38 and called via [svim-asm](https://github.com/eldariont/svim-asm).
