@@ -46,6 +46,12 @@ The MEI statistics can be computed using
 
 `cd mei_statistics/ && ./stats.sh`
 
+## MEI allele length distribution
+
+The comparison of sequence-resolved transposable element insertions from ONT compared to illumina-based MEI predictions
+
+`cd mei_allele_length/ && ./len.sh`
+
 ## Lifting of SVs to GRCh38
 
 This workflow uses the phased SVs for each sample to implant SVs into CHM13 haplotypes, which are then aligned to GRCh38 and called via [svim-asm](https://github.com/eldariont/svim-asm).
