@@ -4,11 +4,11 @@ This repository contains some of the genome analysis scripts used for the 1000 G
 
 ## Installation
 
-To create a conda environment with the required tools just use
+To create a mamba environment with the required tools just use
 
 `git clone https://github.com/1kg-ont-vienna/sv-analysis.git`
 
-`cd sv-analysis/scripts/
+`cd sv-analysis/scripts/`
 
 `make all`
 
