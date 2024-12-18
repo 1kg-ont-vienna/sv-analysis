@@ -11,11 +11,6 @@
 	    "name": "Pani, Samarendra"
 	},
 	{
-	    "orcid": "0000-0003-4693-3140",
-	    "affiliation": "European Molecular Biology Laboratory (EMBL)",
-	    "name": "Rodríguez-Martín, Bernardo"
-	},
-	{
 	    "orcid": "0000-0002-0382-3702",
 	    "affiliation": "Heinrich Heine University",
 	    "name": "Ebler, Jana"
@@ -56,9 +51,66 @@
 	    "name": "Asparuhova, Mila"
 	},
 	{
+	    "affiliation": "Heinrich Heine University",
+	    "name": "Magalhães, Hugo"
+	},
+	{
+	    "affiliation": "Radboud University Medical Center",
+	    "name": "Höps, Wolfram"
+	},
+	{
+	    "affiliation": "Centre for Genomic Regulation (CRG)",
+	    "name": "Sotelo-Fonseca, Jesus Emiliano"
+	},
+	{
+	    "affiliation": "EMBL European Bioinformatics Institute (EMBL-EBI)",
+	    "name": "Fitzgerald, Tomas"
+	},
+	{
+	    "affiliation": "EMBL European Bioinformatics Institute (EMBL-EBI)",
+	    "name": "Santana-Garcia, Walter"
+	},
+	{
+	    "affiliation": "Institut de Biotecnologia i de Biomedicina",
+	    "name": "Moreira-Pinhal, Ricardo"
+	},
+	{
+	    "affiliation": "Heinrich Heine University",
+	    "name": "Pérez-Llanos, Francy J."
+	},
+	{
+	    "affiliation": "Heinrich Heine University",
+	    "name": "Wollenweber, Tassilo Erik"
+	},
+	{
+	    "affiliation": "Heinrich Heine University",
+	    "name": "Sivalingam, Sugirthan"
+	},
+	{
+	    "affiliation": "Heinrich Heine University",
+	    "name": "Wieczorek, Dagmar"
+	},
+	{
+	    "affiliation": "Institut de Biotecnologia i de Biomedicina",
+	    "name": "Cáceres, Mario"
+	},
+	{
+	    "affiliation": "Radboud University Medical Center",
+	    "name": "Gilissen, Christian"
+	},
+	{
 	    "orcid": "0000-0002-8350-1235",
 	    "affiliation": "EMBL European Bioinformatics Institute (EMBL-EBI)",
 	    "name": "Hunt, Sarah"
+	},
+	{
+	    "affiliation": "EMBL European Bioinformatics Institute (EMBL-EBI)",
+	    "name": "Birney, Ewan"
+	},
+	{
+	    "orcid": "0000-0003-4693-3140",
+	    "affiliation": "European Molecular Biology Laboratory (EMBL)",
+	    "name": "Rodríguez-Martín, Bernardo"
 	},
 	{
 	    "orcid": "0000-0001-5773-5620",
