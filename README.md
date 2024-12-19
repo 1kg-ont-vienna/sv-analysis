@@ -4,7 +4,7 @@ Long-read sequencing and structural variant characterization in 1,019 samples fr
 
 ## Data collection
 
-The data is hosted at the International Genome Sample Resource (IGSR) in the directory [https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/). The data is also available as an AWS S3 bucket, [s3://1kg-ont-vienna](https://1kg-ont-vienna.s3.amazonaws.com).
+The data is hosted at the International Genome Sample Resource (IGSR) in the directory [https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/). The data is also available as an AWS S3 bucket, s3://1kg-ont-vienna
 
 ## Code availability
 
