@@ -21,6 +21,7 @@ Below is a list of software repositories that were developed or extended as part
 - [inversion-remap](https://github.com/celiatsapalou/Small_Inversions_Remap): Pipeline to export high-mismatch regions, remap with NGMLR, and call inversions.
 - [GeONTIpe](https://github.com/RMoreiraP/GeONTIpe): Pipeline to genotype inversions using ONT reads.
 - [SVarp](https://github.com/asylvz/SVarp): Pangenome-based structural variant discovery.
+- [gaftools](https://github.com/marschall-lab/gaftools): Toolkit to sort and process GAF files.
 - [delly](https://github.com/dellytools/delly): Long-read SV calling and pangenome-based SV filtering.
 - [sansa](https://github.com/dellytools/sansa): Structural variant VCF annotation, duplicate removal and SV comparison.
 - [rare-disease-analysis](https://github.com/hugocarmaga/rare-disease-analysis): Pipeline to filter and get SV statistics on rare disease samples after comparing SVs to public SV catalogs.
