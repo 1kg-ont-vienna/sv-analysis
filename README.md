@@ -6,6 +6,26 @@ Long-read sequencing and structural variant characterization in 1,019 samples fr
 
 The data is hosted at the International Genome Sample Resource (IGSR) in the directory [https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/).
 
+## Code availability
+
+Below is a list of software repositories that were developed or used as part of the study.
+
+- [giggles](https://github.com/samarendra-pani/giggles): The SV genotyper Giggles which uses long reads and a pangenome reference.
+- [SVAN](https://github.com/REPBIO-LAB/SVAN): The SV annotation (SVAN) toolkit.
+- [project-ont-1kg-hhu](https://github.com/marschall-lab/project-ont-1kg): Various snakemake pipelines for haplotagging reads, phasing long-reads, running giggles and SVarp, QC workflows, ancestral allele annotation and VNTR genotyping.
+- [project-ont-1kg-embl](https://github.com/1kg-ont-vienna/sv-analysis/tree/main/scripts): Analysis scripts for alignment and MEI statistics, MEI length calculations, FDR computations, GRCh38 callset generation, statistical phasing, IRS testing and SV comparisons to multi-platform whole-genome assemblies.
+- [long-read-1kg](https://github.com/eblerjana/long-read-1kg): Pipeline to create a multi-sample SVarp VCF from single-sample SVarp calls and the graph augmentation pipeline.
+- [sv-homology](https://github.com/carstenhain/SV_homology): Scripts for finding and annotating homologus flanks at SV breakpoints.
+- [methylation-analysis](https://github.com/santanaw/1kGP_mods): Analysis of DNA modifications.
+- [inversion-ont-simulations](https://github.com/celiatsapalou/Simulations_ONT_Data): Pipeline to simulate ONT data on a genome with small inversions for benchmarking genome mappers and SV callers.
+- [inversion-remap](https://github.com/celiatsapalou/Small_Inversions_Remap): Pipeline to export high-mismatch regions, remap with NGMLR, and call inversions.
+- [GeONTIpe](https://github.com/RMoreiraP/GeONTIpe): Pipeline to genotype inversions using ONT reads.
+- [SVarp](https://github.com/asylvz/SVarp): Pangenome-based structural variant discovery.
+- [delly](https://github.com/dellytools/delly): Long-read SV calling and pangenome-based SV filtering.
+- [sansa](https://github.com/dellytools/sansa): Structural variant VCF annotation, duplicate removal and SV comparison.
+- [rare-disease-analysis](https://github.com/hugocarmaga/rare-disease-analysis): Pipeline to filter and get SV statistics on rare disease samples after comparing SVs to public SV catalogs.
+- [variant-calling](https://github.com/hugocarmaga/variant-calling): SV calling pipeline from HiFi reads to structural variation VCF files.
+
 ## Genome alignments
 
 The alignment pipeline used to align to GRCh38, CHM13 and a prebuilt human genome graph is detailed below. The [reference subdirectory](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/reference/) at IGSR contains the used linear and graph-based reference genomes. There are distinct subdirectories for the linear reference genome alignments in CRAM format for [GRCh38](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38) and [CHM13](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/t2t/) as well as graph genome alignments in [GAF](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/gaf/) format.
