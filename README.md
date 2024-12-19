@@ -8,7 +8,7 @@ The data is hosted at the International Genome Sample Resource (IGSR) in the dir
 
 ## Code availability
 
-Below is a list of software repositories that were developed or used as part of the study.
+Below is a list of software repositories that were developed or extended as part of the study.
 
 - [giggles](https://github.com/samarendra-pani/giggles): The SV genotyper Giggles which uses long reads and a pangenome reference.
 - [SVAN](https://github.com/REPBIO-LAB/SVAN): The SV annotation (SVAN) toolkit.
