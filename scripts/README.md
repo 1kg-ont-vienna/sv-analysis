@@ -52,6 +52,12 @@ The comparison of sequence-resolved transposable element insertions from ONT com
 
 `cd mei_allele_length/ && ./len.sh`
 
+## VNTR density by Genome in a Bottle genomic stratifications
+
+The analysis of VNTR density can be reproduced using
+
+`cd vntr_density/ && ./vntr.sh`
+
 ## Comparing SAGA SVs to multi-platform whole-genome assemblies from HGSVC3
 
 The MEI comparison to HGSVC3 can be recomputed using:
