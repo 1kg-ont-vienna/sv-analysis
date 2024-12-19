@@ -32,7 +32,7 @@ You will also need a copy of the latest data release for the 1000 Genomes ONT pr
 
 [https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/release/](https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/release/)
 
-The scripts assume these alignments are available in the subfolder `./release/`.
+The scripts assume these release data sets are available in the subfolder `./release/`.
 
 ## Alignment statistics
 
