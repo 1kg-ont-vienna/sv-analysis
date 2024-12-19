@@ -7,7 +7,12 @@ export PATH=${BASEDIR}/../mamba/bin:${PATH}
 # Window for insertions
 WIN=200
 ONLY_CANONICAL=0
+USE_GENOMEMASK=0
 
+if [ ! -f CHM13_notinalldifficultregions.bed.gz ]
+then
+    wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/genome-stratifications/v3.5/CHM13@all/Union/CHM13_notinalldifficultregions.bed.gz
+fi
 if [ ! -f MEI_Callset_T2T-CHM13.ALL.20240918.csv ]
 then
     wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/HGSVC3/release/Mobile_Elements/1.0/MEI_Callset_T2T-CHM13.ALL.20240918.csv.gz
@@ -42,6 +47,13 @@ do
 	    bcftools view -i '(STRLEN(ALT)>=(STRLEN(REF)+50)) && INFO/NOT_CANONICAL==0' -s ${SAMPLE} --min-ac 1 ont.vcf.gz | bcftools query -f "%CHROM\t%POS\t%ID\t%INFO/ITYPE_N\t%INFO/FAM_N\n" - | awk '{print $1"\t"($2-'${WIN}')"\t"($2+'${WIN}')"\t"$3"\t"$4"\t"$5;}' | egrep "partnered|solo" | grep -w "${TAG}" | sort -k1,1V -k2,2n | uniq > ont.${SAMPLE}.${TAG}.bed
 	fi
 	cat hgsvc3.t2t.bed | grep -w ${SAMPLE} | grep -w "${TAG}" | sort -k1,1V -k2,2n | uniq > hgsvc.${SAMPLE}.${TAG}.bed
+	if [ ${USE_GENOMEMASK} -eq 1 ]
+	then
+	    ## For sensitivity estimates only
+	    bedtools intersect -v -a hgsvc.${SAMPLE}.${TAG}.bed -b <(zcat CHM13_notinalldifficultregions.bed.gz) | sort -k1,1V -k2,2n | uniq > hgsvc.${SAMPLE}.${TAG}.bed.tmp
+	    mv hgsvc.${SAMPLE}.${TAG}.bed.tmp hgsvc.${SAMPLE}.${TAG}.bed
+	fi
+
 	COUNTONT=`cat ont.${SAMPLE}.${TAG}.bed | cut -f 1-3 | sort | uniq | wc -l`
 	COUNTHGSVC=`cat hgsvc.${SAMPLE}.${TAG}.bed | cut -f 1-3 | sort | uniq | wc -l`
 	SHAREDONT=`bedtools intersect -a ont.${SAMPLE}.${TAG}.bed -b hgsvc.${SAMPLE}.${TAG}.bed -wao | awk '$7!="."' | cut -f 1-3 | sort | uniq | wc -l`
@@ -65,6 +77,7 @@ Rscript bySample.R
 for TAG in Alu L1 SVA
 do
     # Avg. FDR
+    echo "${TAG} average sites:" `cat stats.tsv  | grep "ONT" | grep "${TAG}" | awk '{SUM+=$4;} END {print SUM/NR;}'`
     echo "${TAG} average FDR:" `cat stats.tsv  | grep "ONT" | grep "${TAG}" | awk '{SUM+=$7;} END {print SUM/NR;}'`
     echo "${TAG} average sensitivity" `cat stats.tsv  | grep "ONT" | grep "${TAG}" | awk '{SUM+=$8;} END {print SUM/NR;}'`
 done
