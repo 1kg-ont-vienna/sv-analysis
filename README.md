@@ -13,7 +13,7 @@ Below is a list of software repositories that were developed or extended as part
 - [giggles](https://github.com/samarendra-pani/giggles): The SV genotyper Giggles which uses long reads and a pangenome reference.
 - [SVAN](https://github.com/REPBIO-LAB/SVAN): The SV annotation (SVAN) toolkit.
 - [project-ont-1kg-hhu](https://github.com/marschall-lab/project-ont-1kg): Various snakemake pipelines for haplotagging reads, phasing long-reads, running giggles and SVarp, QC workflows, ancestral allele annotation and VNTR genotyping.
-- [project-ont-1kg-embl](https://github.com/1kg-ont-vienna/sv-analysis/tree/main/scripts): Analysis scripts for alignment and MEI statistics, MEI length calculations, FDR computations, GRCh38 callset generation, statistical phasing, IRS testing and SV comparisons to multi-platform whole-genome assemblies.
+- [project-ont-1kg-embl](https://github.com/1kg-ont-vienna/sv-analysis/tree/main/scripts): Analysis scripts for alignment statistics, FDR computations, GRCh38 callset generation, IRS testing and SV comparisons.
 - [long-read-1kg](https://github.com/eblerjana/long-read-1kg): Pipeline to create a multi-sample SVarp VCF from single-sample SVarp calls and the graph augmentation pipeline.
 - [sv-homology](https://github.com/carstenhain/SV_homology): Scripts for finding and annotating homologus flanks at SV breakpoints.
 - [methylation-analysis](https://github.com/santanaw/1kGP_mods): Analysis of DNA modifications.
