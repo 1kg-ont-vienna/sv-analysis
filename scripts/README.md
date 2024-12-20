@@ -102,3 +102,14 @@ bcftools view merged.bcf chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 chr1
 bcftools index svim.asm.hg38.bcf
 ```
 
+## Comparison of SVs to gnomAD
+
+Using the lifted GRCh38 call set, a comparison to gnomAD can be carried out using:
+
+`cd gnomad/ && ./novelty.sh`
+
+
+## Credits
+
+[HTSlib](https://github.com/samtools/htslib), [SAMtools](https://github.com/samtools/samtools), [BCFtools](https://github.com/samtools/bcftools) and [BEDtools](https://github.com/arq5x/bedtools2) for alignment, VCF and BED file processing. [Minimap2](https://github.com/lh3/minimap2) for long-read alignment to linear reference genomes, [Minigraph](https://github.com/lh3/minigraph) for pangenome graph construction and alignment. [ggplot2](https://ggplot2.tidyverse.org/index.html) for plotting.
+
