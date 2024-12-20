@@ -75,6 +75,11 @@
 	    "name": "Moreira-Pinhal, Ricardo"
 	},
 	{
+	    "orcid": "0000-0002-8350-1235",
+	    "affiliation": "EMBL European Bioinformatics Institute (EMBL-EBI)",
+	    "name": "Hunt, Sarah"
+	},
+	{
 	    "affiliation": "Heinrich Heine University",
 	    "name": "Pérez-Llanos, Francy J."
 	},
@@ -97,11 +102,6 @@
 	{
 	    "affiliation": "Radboud University Medical Center",
 	    "name": "Gilissen, Christian"
-	},
-	{
-	    "orcid": "0000-0002-8350-1235",
-	    "affiliation": "EMBL European Bioinformatics Institute (EMBL-EBI)",
-	    "name": "Hunt, Sarah"
 	},
 	{
 	    "affiliation": "EMBL European Bioinformatics Institute (EMBL-EBI)",
