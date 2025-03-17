@@ -146,7 +146,7 @@
     ],
     "title": "Long-read sequencing and structural variant characterization in 1,019 samples from the 1000 Genomes Project",
     "upload_type": "dataset",
-    "description": "SV analysis of the long-read sequencing data of 1,019 samples from the 1000 Genomes Project. The data is hosted at the International Genome Sample Resource (IGSR) in the <a href=\"https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/\">1KG_ONT_VIENNA</a> directory. The corresponding GitHub repository is <a href=\"https://github.com/1kg-ont-vienna\">1kg-ont-vienna</a>.",
+    "description": "SV analysis of the long-read sequencing data of 1,019 samples from the 1000 Genomes Project. The data is hosted at the International Genome Sample Resource (IGSR) in the <a href=\"https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/\">1KG_ONT_VIENNA</a> directory. The corresponding GitHub repository is <a href=\"https://github.com/1kg-ont-vienna\">1kg-ont-vienna</a>. Raw and basecalled sequencing data are additionally available via the OpnMe initiative of Boehringer Ingelheim: <a href=\"https://opnme.com/genomiclens\">genomiclens</a>",
     "keywords": [
 	"structural-variation",
 	"genomics"
