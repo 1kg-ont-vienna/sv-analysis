@@ -58,19 +58,19 @@ The analysis of VNTR density can be reproduced using
 
 `cd vntr_density/ && ./vntr.sh`
 
-## Comparing SAGA SVs to multi-platform whole-genome assemblies from HGSVC3
+## Comparison of the SAGA SV call set to HGSVC3
+
+To run the call set comparison for the 16 samples shared between the 2 projects use:
+
+`cd assembly_comp/ && ./hgsvc3.sh`
+
+Further scripts are included to reproduce the false negative density plot (`./fn.plot.sh`), compute the FDRs (`./fdr.sh`) and run the sample-specific FDR analysis (`./fdrBySample.sh`). The assembly comparison revealed 556 SVs that are present in every sample of the 1000 Genomes ONT study that are likely representing misalignments or graph construction errors (`graph.errors.svs.gz`). The TRF annotation track for CHM13 (T2T) can be downloaded from the UCSC table browser (`repeat.trf.chm13.msk.gz`).
+
+## Comparing SAGA MEIs to multi-platform whole-genome assemblies from HGSVC3
 
 The MEI comparison to HGSVC3 can be recomputed using:
 
 `cd ins_mei_hgsvc3/ && ./bySample.sh`
-
-FDR for all non tandem-repeat associated insertions:
-
-`cd ins_hgsvc3/ && ./bySample.sh`
-
-Likewise for deletions:
-
-`cd del_hgsvc3/ && ./bySample.sh`
 
 For transposable element deletions from the CHM13 reference:
 
